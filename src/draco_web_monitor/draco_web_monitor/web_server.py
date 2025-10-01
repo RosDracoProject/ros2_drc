@@ -12,8 +12,10 @@ import netifaces
 
 class WebMonitor:
     def __init__(self, port=5000):
+        # 템플릿 폴더의 절대 경로 설정
+        template_dir = os.path.join(os.path.dirname(__file__), 'templates')
         self.app = Flask(__name__, 
-                        template_folder='templates',
+                        template_folder=template_dir,
                         static_folder='static')
         self.port = port
         
@@ -75,7 +77,13 @@ class WebMonitor:
         
         @self.app.route('/')
         def index():
-            return render_template('index.html')
+            # 템플릿 파일을 직접 읽어서 반환
+            try:
+                template_path = os.path.join(os.path.dirname(__file__), 'templates', 'index.html')
+                with open(template_path, 'r', encoding='utf-8') as f:
+                    return f.read()
+            except FileNotFoundError:
+                return f"<h1>Template not found</h1><p>Template path: {template_path}</p>", 404
         
         @self.app.route('/test')
         def test():
@@ -130,6 +138,7 @@ class WebMonitor:
     def start(self):
         """웹 서버 시작"""
         print(f"웹 모니터링 서버가 http://localhost:{self.port} 에서 실행됩니다.")
+        print(f"템플릿 폴더: {self.app.template_folder}")
         self.app.run(host='0.0.0.0', port=self.port, debug=False, threaded=True)
 
 if __name__ == '__main__':

@@ -10,8 +10,12 @@ class WebMonitorNode(Node):
     def __init__(self):
         super().__init__('web_monitor_node')
         
+        # 포트 파라미터 선언 및 가져오기
+        self.declare_parameter('port', 5000)
+        port = self.get_parameter('port').get_parameter_value().integer_value
+        
         # 웹 모니터 인스턴스 생성
-        self.web_monitor = WebMonitor(port=5000)
+        self.web_monitor = WebMonitor(port=port)
         
         # ROS2 구독자 생성
         self.compression_ratio_sub = self.create_subscription(
@@ -48,7 +52,7 @@ class WebMonitorNode(Node):
         self.web_thread.start()
         
         self.get_logger().info('웹 모니터링 노드가 시작되었습니다.')
-        self.get_logger().info('웹 인터페이스: http://localhost:5000')
+        self.get_logger().info(f'웹 인터페이스: http://localhost:{port}')
     
     def compression_ratio_callback(self, msg):
         """압축률 데이터 콜백"""

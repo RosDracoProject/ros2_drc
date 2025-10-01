@@ -1,4 +1,6 @@
 from setuptools import find_packages, setup
+import os
+from glob import glob
 
 package_name = 'draco_web_monitor'
 
@@ -10,6 +12,9 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        # 템플릿 파일들 포함
+        (os.path.join('lib', package_name, 'templates'), 
+            glob('draco_web_monitor/templates/*')),
     ],
     install_requires=['setuptools', 'flask', 'psutil', 'netifaces'],
     zip_safe=True,
