@@ -103,10 +103,10 @@ install(TARGETS encoder_node bag_processor_node
 #   RUNTIME DESTINATION lib/${PROJECT_NAME}
 # )
 
-# 런치 파일 설치 (임시 주석 처리)
-# install(DIRECTORY launch
-#   DESTINATION share/${PROJECT_NAME}
-# )
+# 런치 파일 설치
+install(DIRECTORY launch
+  DESTINATION share/${PROJECT_NAME}
+)
 
 # 설정 파일 설치 (임시 주석 처리)
 # install(DIRECTORY config
