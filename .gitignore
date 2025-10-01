@@ -1,0 +1,41 @@
+# Build directories
+build/
+install/
+log/
+
+# ROS2 specific
+*.db3
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# ROS2 bag files (keep directory structure but ignore contents)
+rosbag2/*/
+!rosbag2/
+!rosbag2/*/
+!rosbag2/*/metadata.yaml
+
+# Temporary files
+*.tmp
+*.temp
+*.log
